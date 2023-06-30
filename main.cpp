@@ -91,6 +91,62 @@ class cBall
         }
 };
 
+class cPaddle
+{
+    private:
+        int x, y;
+        int originalX, originalY;
+    public:
+        cPaddle()
+        {
+            x = y = 0;
+        }
+        
+        cPaddle(int posX, int posY) // ##STERS## constructor delegation: toate operatiile din constructorul fara argumente sunt efectuate inainte
+        {
+            originalX = posX;
+            originalY = posY;
+            x = posX;
+            y = posY;
+        }
+
+        inline void Reset()
+        {
+            x = originalX;
+            y = originalY;
+        }
+
+        inline int getX()
+        {
+            return x;
+        }
+
+        inline int getY()
+        {
+            return y;
+        }
+
+        inline void moveUp()
+        {
+            y--;
+        }
+
+        inline void moveDown()
+        {
+            y++;
+        }
+
+        friend std::ostream & operator << (std::ostream & o, cPaddle c)
+        {
+            o << "Paddle [" << c.x << "," << c.y << "]";
+            return o;
+        }
+};
+
+class cGameManager
+{
+
+};
 
 int main()
 {
@@ -103,6 +159,18 @@ int main()
     c. randomDirection();
     c.Move();
     std::cout << c << std::endl;
+
+    cPaddle p1(0, 0);
+    cPaddle p2 (10,0); 
+
+    std::cout << p1 << std::endl;
+    std::cout << p2 << std::endl;
+
+    p1.moveUp();
+    p2.moveDown();
+
+    std::cout << p1 << std::endl;
+    std::cout << p2 << std::endl;
 
     return 0;
 }
